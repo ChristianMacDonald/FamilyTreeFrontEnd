@@ -1,5 +1,7 @@
 import { LOGIN_START, LOGIN_SUCCESS, LOGIN_ERROR, login } from './login';
+import { REGISTER_START, REGISTER_SUCCESS, REGISTER_ERROR, register } from './register';
 
 export {
-    LOGIN_START, LOGIN_SUCCESS, LOGIN_ERROR, login
+    LOGIN_START, LOGIN_SUCCESS, LOGIN_ERROR, login,
+    REGISTER_START, REGISTER_SUCCESS, REGISTER_ERROR, register
 };
