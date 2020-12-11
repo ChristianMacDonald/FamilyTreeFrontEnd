@@ -4,8 +4,6 @@ function HomePage(props) {
     return (
       <div>
         <Link to="/login">Login</Link>
-        <br/>
-        <Link to="/register">Register</Link>
       </div>
     );
 }
