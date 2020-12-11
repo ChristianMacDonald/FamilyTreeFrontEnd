@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { connect } from 'react-redux';
 import { login } from '../actions';
 
-import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
+import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 
 function LoginForm(props) {
     let [username, setUsername] = useState('');
