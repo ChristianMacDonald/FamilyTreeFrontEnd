@@ -1,6 +1,6 @@
 import { Nav, NavItem, NavLink } from 'reactstrap';
 
-function Header(props) {
+function Header() {
     return (
         <header>
           <Nav>
@@ -9,6 +9,9 @@ function Header(props) {
             </NavItem>
             <NavItem>
               <NavLink href="/login">Login</NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink href="/family-trees">Family Trees</NavLink>
             </NavItem>
           </Nav>
         </header>
