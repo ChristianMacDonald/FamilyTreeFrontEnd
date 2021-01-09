@@ -15,7 +15,7 @@ function RegisterForm(props) {
                 <Input
                     type="text"
                     name="username"
-                    id="username"
+                    id="register-username"
                     onChange={e => {
                         setUsername(e.target.value);
                     }}
@@ -26,7 +26,7 @@ function RegisterForm(props) {
                 <Input
                     type="password"
                     name="password"
-                    id="password"
+                    id="register-password"
                     onChange={e => {
                         setPassword(e.target.value);
                     }}
