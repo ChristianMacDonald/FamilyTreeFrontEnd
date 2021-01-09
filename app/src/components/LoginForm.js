@@ -15,7 +15,7 @@ function LoginForm(props) {
                 <Input
                     type="text"
                     name="username"
-                    id="username"
+                    id="login-username"
                     onChange={e => {
                         setUsername(e.target.value);
                     }}
@@ -26,7 +26,7 @@ function LoginForm(props) {
                 <Input
                     type="password"
                     name="password"
-                    id="password"
+                    id="login-password"
                     onChange={e => {
                         setPassword(e.target.value);
                     }}

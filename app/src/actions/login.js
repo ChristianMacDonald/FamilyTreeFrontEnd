@@ -8,6 +8,7 @@ export const login = creds => dispatch => {
     dispatch({ type: LOGIN_START, payload: true });
     axios.post('https://cwm-family-tree.herokuapp.com/api/auth/login', creds).then(res => {
         localStorage.setItem('token', res.data.token);
+        localStorage.setItem('username', creds.username);
         dispatch({ type: LOGIN_SUCCESS, payload: res });
     }).catch(err => {
         dispatch({ type: LOGIN_ERROR, payload: err });

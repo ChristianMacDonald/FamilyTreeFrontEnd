@@ -15,6 +15,7 @@ function LoginPage(props) {
             setActiveTab(tab);
         }
     }
+    
     return (
         <div id="login-page">
             <Card>
