@@ -44,7 +44,7 @@ function FamilyTreePage(props) {
                     <TabContent activeTab={activeTab}>
                         <TabPane tabId="1">
                             {props.pending ? <h1>Loading</h1> : null}
-                            {(!props.pending && props.res) ? props.res.data.length > 0 ? props.res.data.map((tree, i) => <div key={i}>{tree.name}</div>) : 'No saved trees' : null}
+                            {(!props.pending && props.res) ? props.res.data.length > 0 ? props.res.data.map((tree, i) => <div key={i} data-id={tree.id}>{tree.name}</div>) : 'No saved trees' : null}
                         </TabPane>
                         <TabPane tabId="2">
                             <Form>
