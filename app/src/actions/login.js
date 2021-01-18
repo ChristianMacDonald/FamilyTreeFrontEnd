@@ -10,6 +10,7 @@ export const login = creds => dispatch => {
         localStorage.setItem('token', res.data.token);
         localStorage.setItem('username', creds.username);
         dispatch({ type: LOGIN_SUCCESS, payload: res });
+        window.location.replace('http://localhost:3000');
     }).catch(err => {
         dispatch({ type: LOGIN_ERROR, payload: err });
     });
