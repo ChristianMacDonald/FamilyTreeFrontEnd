@@ -1,13 +1,14 @@
 import { useEffect, useState } from 'react';
 import {} from 'reactstrap';
 import { connect } from 'react-redux';
-import { getFamilyTrees } from '../actions';
-import { Card, CardBody, TabContent, TabPane, Nav, NavItem, NavLink, Form, FormGroup, Label, Input } from 'reactstrap';
+import { getFamilyTrees, createFamilyTree } from '../actions';
+import { Button, Card, CardBody, TabContent, TabPane, Nav, NavItem, NavLink, Form, FormGroup, Label, Input } from 'reactstrap';
 import classnames from 'classnames';
 import './FamilyTreePage.css';
 
 function FamilyTreePage(props) {
     const [activeTab, setActiveTab] = useState('1');
+    const [familyTreeName, setFamilyTreeName] = useState('');
     
     const toggle = tab => {
         if (activeTab !== tab) {
@@ -50,7 +51,12 @@ function FamilyTreePage(props) {
                             <Form>
                                 <FormGroup>
                                     <Label for="name">Name</Label>
-                                    <Input type="text" name="name" id="family-tree-name"/>
+                                    <Input type="text" name="name" id="family-tree-name" onChange={e => {
+                                        setFamilyTreeName(e.target.value);
+                                    }}/>
+                                    <Button onClick={() => {
+                                        props.createFamilyTree({ name: familyTreeName });
+                                    }}>Submit</Button>
                                 </FormGroup>
                             </Form>
                         </TabPane>
@@ -61,4 +67,4 @@ function FamilyTreePage(props) {
     );
 }
 
-export default connect(state => ({ pending: state.getFamilyTrees.pending, res: state.getFamilyTrees.res }), { getFamilyTrees })(FamilyTreePage);
+export default connect(state => ({ pending: state.getFamilyTrees.pending, res: state.getFamilyTrees.res }), { getFamilyTrees, createFamilyTree })(FamilyTreePage);
