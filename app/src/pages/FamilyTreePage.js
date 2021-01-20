@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import {} from 'reactstrap';
 import { connect } from 'react-redux';
-import { getFamilyTrees, createFamilyTree } from '../actions';
+import { getFamilyTrees, createFamilyTree, deleteFamilyTree } from '../actions';
 import { Button, Card, CardBody, TabContent, TabPane, Nav, NavItem, NavLink, Form, FormGroup, Label, Input } from 'reactstrap';
 import classnames from 'classnames';
 import './FamilyTreePage.css';
@@ -45,7 +45,9 @@ function FamilyTreePage(props) {
                     <TabContent activeTab={activeTab}>
                         <TabPane tabId="1">
                             {props.pending ? <h1>Loading</h1> : null}
-                            {(!props.pending && props.res) ? props.res.data.length > 0 ? props.res.data.map((tree, i) => <div key={i} data-id={tree.id}>{tree.name}</div>) : 'No saved trees' : null}
+                            {(!props.pending && props.res) ? props.res.data.length > 0 ? props.res.data.map((tree, i) => <div key={i}>{tree.name}<Button data-id={tree.id} onClick={(e) => {
+                                props.deleteFamilyTree(e.target.dataset.id);
+                            }}>Delete</Button></div>) : 'No saved trees' : null}
                         </TabPane>
                         <TabPane tabId="2">
                             <Form>
@@ -67,4 +69,4 @@ function FamilyTreePage(props) {
     );
 }
 
-export default connect(state => ({ pending: state.getFamilyTrees.pending, res: state.getFamilyTrees.res }), { getFamilyTrees, createFamilyTree })(FamilyTreePage);
+export default connect(state => ({ pending: state.getFamilyTrees.pending, res: state.getFamilyTrees.res }), { getFamilyTrees, createFamilyTree, deleteFamilyTree })(FamilyTreePage);
