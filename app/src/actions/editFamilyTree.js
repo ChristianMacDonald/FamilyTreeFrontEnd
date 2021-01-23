@@ -8,6 +8,7 @@ export const editFamilyTree = (id, changes) => dispatch => {
     dispatch({ type: EDIT_FAMILY_TREE_START, payload: true });
     authorizedAxios().put(`https://cwm-family-tree.herokuapp.com/api/users/${localStorage.getItem('username')}/family-trees/${id}`, changes).then(res => {
         dispatch({ type: EDIT_FAMILY_TREE_SUCCESS, payload: res });
+        window.location.reload();
     }).catch(err => {
         dispatch({ type: EDIT_FAMILY_TREE_ERROR, payload: err });
     });
