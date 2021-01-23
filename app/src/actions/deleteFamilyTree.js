@@ -8,6 +8,7 @@ export const deleteFamilyTree = id => dispatch => {
     dispatch({ type: DELETE_FAMILY_TREE_START, payload: true });
     authorizedAxios().delete(`https://cwm-family-tree.herokuapp.com/api/users/${localStorage.getItem('username')}/family-trees/${id}`).then(res => {
         dispatch({ type: DELETE_FAMILY_TREE_SUCCESS, payload: res });
+        window.location.reload();
     }).catch(err => {
         dispatch({ type: DELETE_FAMILY_TREE_ERROR, payload: err });
     });
