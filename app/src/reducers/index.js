@@ -6,7 +6,9 @@ import getFamilyTrees from './getFamilyTreesReducer';
 import createFamilyTree from './createFamilyTreeReducer';
 import deleteFamilyTree from './deleteFamilyTreeReducer';
 import editFamilyTree from './editFamilyTreeReducer';
+import getFamilyMembers from './getFamilyMembersReducer';
+import validateToken from './validateTokenReducer';
 
-const rootReducer = combineReducers({ login, register, getFamilyTrees, createFamilyTree, deleteFamilyTree, editFamilyTree });
+const rootReducer = combineReducers({ login, register, getFamilyTrees, createFamilyTree, deleteFamilyTree, editFamilyTree, getFamilyMembers, validateToken });
 
 export default rootReducer;

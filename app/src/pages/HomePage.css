@@ -1,0 +1,33 @@
+#family-tree-list .list-group-item {
+    margin: 10px;
+}
+
+#family-tree-list-card {
+    width: 50%;
+    margin: 0 auto;
+    padding: 10px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+#family-tree-editing-form {
+    width: 50%;
+    margin: 0 auto;
+}
+
+#ftcf-card, #ftef-card {
+    width: 50%;
+    margin: 0 auto;
+    padding: 10px;
+}
+
+#ftcf-submit, #ftef-submit {
+    width: 20%;
+    margin: 0 auto;
+}
