@@ -10,9 +10,6 @@ function Header() {
             <NavItem>
               <NavLink href="/login">Login</NavLink>
             </NavItem>
-            <NavItem>
-              <NavLink href="/family-trees">Family Trees</NavLink>
-            </NavItem>
           </Nav>
         </header>
     );
