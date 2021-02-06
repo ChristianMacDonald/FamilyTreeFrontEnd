@@ -17,6 +17,9 @@ function HomePage(props) {
   const [familyTreeFormToggle, setFamilyTreeFormToggle] = useState(false);
   const [familyTreeName, setFamilyTreeName] = useState('');
   const [editing, setEditing] = useState(false);
+  const [familyMemberFormToggle, setFamilyMemberFormToggle] = useState(false);
+  const [motherID, setMotherID] = useState(-1);
+  const [fatherID, setFatherID] = useState(-1);
 
   const updateFamilyTreeName = e => {
     setFamilyTreeName(e.target.value);
@@ -36,8 +39,20 @@ function HomePage(props) {
     setFamilyTreeFormToggle(!familyTreeFormToggle);
   };
 
+  const toggleFamilyMemberForm = () => {
+    setFamilyMemberFormToggle(!familyMemberFormToggle);
+  };
+
   const toggleEditing = () => {
     setEditing(!editing);
+  };
+
+  const updateMotherID = e => {
+    setMotherID(parseInt(e.target.value));
+  };
+
+  const updateFatherID = e => {
+    setFatherID(parseInt(e.target.value));
   };
 
   return editing ? (
@@ -80,13 +95,50 @@ function HomePage(props) {
                     <br/>
                     <ListGroupItemHeading>Family Members</ListGroupItemHeading>
                     <hr/>
-                    <ListGroup>
+                    <ListGroup id="family-member-list">
                       {props.familyMembers.length > 0 ? props.familyMembers.map((member, i) => (
                         <ListGroupItem key={i}>
                           {`${member.first_name} ${member.last_name}`}
                         </ListGroupItem>
                       )) : 'No family members'}
                     </ListGroup>
+                    <br/>
+                    {familyMemberFormToggle ? (
+                      <Form id="family-member-creation-form">
+                        <FormGroup>
+                          <Label for="fmcf-first-name">First Name</Label>
+                          <Input type="text" name="first-name" id="fmcf-first-name"/>
+                        </FormGroup>
+                        <FormGroup>
+                          <Label for="fmcf-last-name">Last Name</Label>
+                          <Input type="text" name="last-name" id="fmcf-last-name"/>
+                        </FormGroup>
+                        {props.familyMembers.length > 1 ? (
+                          <FormGroup>
+                            <Label for="fmcf-mother">Mother</Label>
+                            <Input type="select" name="mother" id="fmcf-mother" onChange={updateMotherID}>
+                              {props.familyMembers.map((familyMember, i) => {
+                                return (
+                                  <option key={i} value={familyMember.id}>{`${familyMember.first_name} ${familyMember.last_name}`}</option>
+                                );
+                              })}
+                            </Input>
+                          </FormGroup>
+                        ) : null}
+                        {props.familyMembers.length > 1 ? (
+                          <FormGroup>
+                            <Label for="fmcf-father">Father</Label>
+                            <Input type="select" name="father" id="fmcf-father" onChange={updateFatherID}>
+                              {props.familyMembers.map((familyMember, i) => {
+                                return (
+                                  <option key={i} value={familyMember.id}>{`${familyMember.first_name} ${familyMember.last_name}`}</option>
+                                );
+                              })}
+                            </Input>
+                          </FormGroup>
+                        ) : null}
+                      </Form>
+                    ) : <Button onClick={toggleFamilyMemberForm}>Create New Family Member</Button>}
                     <br/>
                     <Button color="info" onClick={() => {
                       toggleEditing();
