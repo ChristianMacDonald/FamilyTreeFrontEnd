@@ -75,7 +75,7 @@ function HomePage(props) {
                     <Button data-id={familyTree.id} onClick={changeSelectedTree}>Show More</Button>
                   </ListGroupItem>
                 ) : (
-                  <ListGroupItem key={i}>
+                  <ListGroupItem>
                     <ListGroupItemHeading>{`Name: ${familyTree.name}`}</ListGroupItemHeading>
                     <br/>
                     <ListGroupItemHeading>Family Members</ListGroupItemHeading>
