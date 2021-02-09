@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import { Button, Card, Form, FormGroup, Input, Label, ListGroup, ListGroupItem, ListGroupItemHeading } from 'reactstrap';
 
-import { getFamilyTrees, createFamilyTree, editFamilyTree, deleteFamilyTree, validateToken, getFamilyMembers } from '../actions';
+import { getFamilyTrees, createFamilyTree, editFamilyTree, deleteFamilyTree, validateToken, getFamilyMembers, createFamilyMember } from '../actions';
 
 import './HomePage.css';
 
@@ -18,8 +18,6 @@ function HomePage(props) {
   const [familyTreeName, setFamilyTreeName] = useState('');
   const [editing, setEditing] = useState(false);
   const [familyMemberFormToggle, setFamilyMemberFormToggle] = useState(false);
-  const [motherID, setMotherID] = useState(-1);
-  const [fatherID, setFatherID] = useState(-1);
 
   const updateFamilyTreeName = e => {
     setFamilyTreeName(e.target.value);
@@ -47,12 +45,25 @@ function HomePage(props) {
     setEditing(!editing);
   };
 
-  const updateMotherID = e => {
-    setMotherID(parseInt(e.target.value));
-  };
+  const createFamilyMember = e => {
+    e.preventDefault();
 
-  const updateFatherID = e => {
-    setFatherID(parseInt(e.target.value));
+    const mother = e.target.mother.value === '-1' ? null : parseInt(e.target.mother.value);
+    const father = e.target.father.value === '-1' ? null : parseInt(e.target.father.value);
+    const age = e.target.age.value === '' ? null : parseInt(e.target.age.value);
+    const gender = e.target.gender.value === '' ? null : e.target.gender.value;
+    const suffix = e.target.suffix.value === '' ? null : e.target.suffix.value;
+
+    props.createFamilyMember({
+        family_tree_id: selectedFamilyTree.id,
+        mother_id:      mother,
+        father_id:      father,
+        first_name:     e.target['first-name'].value,
+        last_name:      e.target['last-name'].value,
+        suffix:         suffix,
+        age:            age,
+        gender:         gender
+    });
   };
 
   return editing ? (
@@ -104,7 +115,7 @@ function HomePage(props) {
                     </ListGroup>
                     <br/>
                     {familyMemberFormToggle ? (
-                      <Form id="family-member-creation-form">
+                      <Form id="family-member-creation-form" onSubmit={createFamilyMember}>
                         <FormGroup>
                           <Label for="fmcf-first-name">First Name</Label>
                           <Input type="text" name="first-name" id="fmcf-first-name"/>
@@ -116,19 +127,17 @@ function HomePage(props) {
                         {props.familyMembers.length > 1 ? (
                           <FormGroup>
                             <Label for="fmcf-mother">Mother</Label>
-                            <Input type="select" name="mother" id="fmcf-mother" onChange={updateMotherID}>
-                              {props.familyMembers.map((familyMember, i) => {
-                                return (
-                                  <option key={i} value={familyMember.id}>{`${familyMember.first_name} ${familyMember.last_name}`}</option>
-                                );
-                              })}
+                            <Input type="select" name="mother" id="fmcf-mother">
+                              <option value="-1"></option>
+                              {props.familyMembers.map((familyMember, i) => <option key={i} value={familyMember.id}>{`${familyMember.first_name} ${familyMember.last_name}`}</option>)}
                             </Input>
                           </FormGroup>
                         ) : null}
                         {props.familyMembers.length > 1 ? (
                           <FormGroup>
                             <Label for="fmcf-father">Father</Label>
-                            <Input type="select" name="father" id="fmcf-father" onChange={updateFatherID}>
+                            <Input type="select" name="father" id="fmcf-father">
+                              <option value="-1"></option>
                               {props.familyMembers.map((familyMember, i) => {
                                 return (
                                   <option key={i} value={familyMember.id}>{`${familyMember.first_name} ${familyMember.last_name}`}</option>
@@ -137,6 +146,25 @@ function HomePage(props) {
                             </Input>
                           </FormGroup>
                         ) : null}
+                        <FormGroup>
+                          <Label for="fmcf-suffix">Suffix</Label>
+                          <Input type="select" name="suffix" id="fmcf-suffix">
+                            {['', 'Jr.', 'Sr.', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X'].map((suffix, i) => {
+                              return (
+                                <option key={i} value={suffix}>{suffix}</option>
+                              );
+                            })}
+                          </Input>
+                        </FormGroup>
+                        <FormGroup>
+                          <Label for="fmcf-age">Age</Label>
+                          <Input type="number" name="age" id="fmcf-age"/>
+                        </FormGroup>
+                        <FormGroup>
+                          <Label for="fmcf-gender">Gender</Label>
+                          <Input type="text" name="gender" id="fmcf-gender"/>
+                        </FormGroup>
+                        <Input type="submit"/>
                       </Form>
                     ) : <Button onClick={toggleFamilyMemberForm}>Create New Family Member</Button>}
                     <br/>
@@ -191,4 +219,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, { getFamilyTrees, createFamilyTree, editFamilyTree, deleteFamilyTree, validateToken, getFamilyMembers })(HomePage);
+export default connect(mapStateToProps, { getFamilyTrees, createFamilyTree, editFamilyTree, deleteFamilyTree, validateToken, getFamilyMembers, createFamilyMember })(HomePage);
