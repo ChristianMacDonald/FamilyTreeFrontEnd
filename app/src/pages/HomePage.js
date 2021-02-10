@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import { Button, Card, Form, FormGroup, Input, Label, ListGroup, ListGroupItem, ListGroupItemHeading } from 'reactstrap';
 
-import { getFamilyTrees, createFamilyTree, editFamilyTree, deleteFamilyTree, validateToken, getFamilyMembers, createFamilyMember } from '../actions';
+import { getFamilyTrees, createFamilyTree, editFamilyTree, deleteFamilyTree, validateToken, getFamilyMembers, createFamilyMember, deleteFamilyMember } from '../actions';
 
 import './HomePage.css';
 
@@ -55,15 +55,19 @@ function HomePage(props) {
     const suffix = e.target.suffix.value === '' ? null : e.target.suffix.value;
 
     props.createFamilyMember({
-        family_tree_id: selectedFamilyTree.id,
-        mother_id:      mother,
-        father_id:      father,
-        first_name:     e.target['first-name'].value,
-        last_name:      e.target['last-name'].value,
-        suffix:         suffix,
-        age:            age,
-        gender:         gender
+      family_tree_id: selectedFamilyTree.id,
+      mother_id:      mother,
+      father_id:      father,
+      first_name:     e.target['first-name'].value,
+      last_name:      e.target['last-name'].value,
+      suffix:         suffix,
+      age:            age,
+      gender:         gender
     });
+  };
+
+  const deleteFamilyMember = e => {
+    props.deleteFamilyMember(selectedFamilyTree.id, e.target.dataset.id);
   };
 
   return editing ? (
@@ -110,6 +114,8 @@ function HomePage(props) {
                       {props.familyMembers.length > 0 ? props.familyMembers.map((member, i) => (
                         <ListGroupItem key={i}>
                           {`${member.first_name} ${member.last_name}`}
+                          &nbsp;
+                          <Button color="danger" data-id={member.id} onClick={deleteFamilyMember}>Delete</Button>
                         </ListGroupItem>
                       )) : 'No family members'}
                     </ListGroup>
@@ -219,4 +225,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, { getFamilyTrees, createFamilyTree, editFamilyTree, deleteFamilyTree, validateToken, getFamilyMembers, createFamilyMember })(HomePage);
+export default connect(mapStateToProps, { getFamilyTrees, createFamilyTree, editFamilyTree, deleteFamilyTree, validateToken, getFamilyMembers, createFamilyMember, deleteFamilyMember })(HomePage);
