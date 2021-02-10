@@ -8,8 +8,9 @@ import deleteFamilyTree from './deleteFamilyTreeReducer';
 import editFamilyTree from './editFamilyTreeReducer';
 import getFamilyMembers from './getFamilyMembersReducer';
 import createFamilyMember from './createFamilyMemberReducer';
+import deleteFamilyMember from './deleteFamilyMemberReducer';
 import validateToken from './validateTokenReducer';
 
-const rootReducer = combineReducers({ login, register, getFamilyTrees, createFamilyTree, deleteFamilyTree, editFamilyTree, getFamilyMembers, createFamilyMember, validateToken });
+const rootReducer = combineReducers({ login, register, getFamilyTrees, createFamilyTree, deleteFamilyTree, editFamilyTree, getFamilyMembers, createFamilyMember, deleteFamilyMember, validateToken });
 
 export default rootReducer;
