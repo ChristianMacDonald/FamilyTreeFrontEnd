@@ -21,7 +21,7 @@ function createFamilyMemberReducer(state=INITIAL_STATE, action) {
                 pending: false,
                 res: action.payload
             };
-        case CREATE_FAMILY_MEMBER_SUCCESS:
+        case CREATE_FAMILY_MEMBER_ERROR:
             return {
                 ...state,
                 pending: false,
