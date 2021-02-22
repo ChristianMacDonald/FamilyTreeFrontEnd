@@ -6,6 +6,7 @@ import FamilyTreeList from '../components/FamilyTreeList';
 import { validateToken, getFamilyTrees } from '../actions';
 
 import './HomePage.css';
+import { Card, CardHeader } from 'reactstrap';
 
 function HomePage(props) {
 	useEffect(() => {
@@ -14,8 +15,7 @@ function HomePage(props) {
 	}, []);
 
 	return (
-		<div id="home-page">
-			<h1>Family Trees</h1>
+		<div>
 			<FamilyTreeList familyTrees={props.familyTrees}/>
 		</div>
 	);

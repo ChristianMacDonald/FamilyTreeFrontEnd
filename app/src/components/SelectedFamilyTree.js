@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { ListGroupItem, ListGroupItemHeading, Fade } from 'reactstrap';
+import { Button, Card, CardHeader, CardBody, ListGroupItem, ListGroupItemHeading } from 'reactstrap';
 
-import { getFamilyMembers } from '../actions';
+import { getFamilyMembers, deleteFamilyTree, selectFamilyTree } from '../actions';
 
 import FamilyMemberList from './FamilyMemberList';
 
@@ -11,13 +11,22 @@ function SelectedFamilyTree(props) {
         props.getFamilyMembers(props.tree.id);
     }, []);
 
+    const handleClick = () => {
+        props.selectFamilyTree(-1);
+    };
+
+    const deleteFamilyTree = () => {
+        props.deleteFamilyTree(props.tree.id);
+    };
+
     return (
-        <ListGroupItem className="family-tree selected">
+        <ListGroupItem className="family-tree selected" onClick={handleClick}>
             <ListGroupItemHeading>{props.tree.name}</ListGroupItemHeading>
-            <Fade in>
-                <h5>Family Members</h5>
-                <FamilyMemberList familyMembers={props.familyMembers}/>
-            </Fade>
+            <FamilyMemberList familyMembers={props.familyMembers}/>
+            <div>
+                <Button color="warning">Edit</Button>
+                <Button color="danger" onClick={deleteFamilyTree}>Delete</Button>
+            </div>
         </ListGroupItem>
     );
 }
@@ -26,4 +35,4 @@ function mapStateToProps(state) {
     return { familyMembers: state.getFamilyMembers.res ? state.getFamilyMembers.res.data : [] }; 
 }
 
-export default connect(mapStateToProps, { getFamilyMembers })(SelectedFamilyTree);
+export default connect(mapStateToProps, { getFamilyMembers, deleteFamilyTree, selectFamilyTree })(SelectedFamilyTree);

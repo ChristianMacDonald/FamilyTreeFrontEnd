@@ -1,8 +1,71 @@
-#family-tree-list {
+#create-family-tree-button {
+    padding: 0;
+}
+
+#create-family-tree-button .list-group-item-heading {
+    padding: 10px;
+}
+
+#family-tree-list-card {
     width: 75%;
     margin: 0 auto;
 }
 
-.selected {
-    background: lightgray;
+#family-tree-list-card .card-body {
+    padding: 0;
+}
+
+.family-tree {
+    margin: 0;
+    border-right: 0;
+    border-left: 0;
+}
+
+.family-tree:first-child {
+    border-top: 0;
+}
+
+.family-tree:last-child {
+    border-bottom: 0;
+}
+
+#family-member-list-card {
+    margin: 20px;
+}
+
+#family-member-list-card .card-body {
+    padding: 0;
+}
+
+.family-member {
+    border-right: 0;
+    border-left: 0;
+}
+
+.family-member:first-child {
+    border-top: 0;
+}
+
+.family-member:last-child {
+    border-bottom: 0;
+}
+
+#ftcf-card {
+    margin: 5px auto;
+    width: 75%;
+}
+
+#family-tree-creation-form {
+    margin: 10px;
+    padding: 10px;
+}
+
+#family-tree-creation-form .card-header {
+    position: relative;
+}
+
+#ftcf-close-button {
+    position: absolute;
+    top: 5px;
+    right: 5px;
 }

@@ -1,4 +1,4 @@
-import { ListGroupItem, ListGroupItemHeading, Fade } from 'reactstrap';
+import { ListGroupItem, ListGroupItemHeading, Fade, Card, CardHeader, CardBody, ListGroupItemText } from 'reactstrap';
 import { connect } from 'react-redux';
 import { selectFamilyTree } from '../actions';
 
