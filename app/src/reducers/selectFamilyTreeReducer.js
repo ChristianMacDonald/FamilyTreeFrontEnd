@@ -1,7 +1,7 @@
 import { SELECT_FAMILY_TREE } from '../actions';
 
 const INITIAL_STATE = {
-    selectedTreeID: -1
+    tree: null
 };
 
 function selectFamilyTreeReducer(state=INITIAL_STATE, action) {
@@ -9,7 +9,7 @@ function selectFamilyTreeReducer(state=INITIAL_STATE, action) {
         case SELECT_FAMILY_TREE:
             return {
                 ...state,
-                selectedTreeID: action.payload
+                tree: action.payload
             };
         default:
             return state;

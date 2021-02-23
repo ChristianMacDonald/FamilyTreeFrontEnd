@@ -7,7 +7,7 @@ import SelectedFamilyTree from './SelectedFamilyTree';
 function FamilyTree(props) {
     return props.tree.id === props.selectedTreeID ? <SelectedFamilyTree tree={props.tree}/> : (
         <ListGroupItem className="family-tree" data-id={props.tree.id} onClick={e => {
-            props.selectFamilyTree(props.tree.id);
+            props.selectFamilyTree(props.tree);
         }}>
             <ListGroupItemHeading>{props.tree.name}</ListGroupItemHeading>
         </ListGroupItem>
@@ -16,7 +16,7 @@ function FamilyTree(props) {
 
 function mapStateToProps(state) {
     return {
-        selectedTreeID: state.selectFamilyTree.selectedTreeID
+        selectedTreeID: state.selectFamilyTree.tree ? state.selectFamilyTree.tree.id : -1
     };
 }
 

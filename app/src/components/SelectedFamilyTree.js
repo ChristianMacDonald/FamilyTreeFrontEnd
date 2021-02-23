@@ -11,20 +11,20 @@ function SelectedFamilyTree(props) {
         props.getFamilyMembers(props.tree.id);
     }, []);
 
-    const handleClick = () => {
-        props.selectFamilyTree(-1);
-    };
-
     const deleteFamilyTree = () => {
         props.deleteFamilyTree(props.tree.id);
     };
 
+    const edit = () => {
+        window.location.replace(`http://localhost:3000/edit/${props.tree.id}`);
+    };
+
     return (
-        <ListGroupItem className="family-tree selected" onClick={handleClick}>
+        <ListGroupItem className="family-tree selected">
             <ListGroupItemHeading>{props.tree.name}</ListGroupItemHeading>
             <FamilyMemberList familyMembers={props.familyMembers}/>
             <div>
-                <Button color="warning">Edit</Button>
+                <Button color="warning" onClick={edit}>Edit</Button>
                 <Button color="danger" onClick={deleteFamilyTree}>Delete</Button>
             </div>
         </ListGroupItem>
@@ -32,7 +32,10 @@ function SelectedFamilyTree(props) {
 }
 
 function mapStateToProps(state) {
-    return { familyMembers: state.getFamilyMembers.res ? state.getFamilyMembers.res.data : [] }; 
+    return {
+        familyMembers: state.getFamilyMembers.res ? state.getFamilyMembers.res.data : [],
+        selectedTreeID: state.selectFamilyTree.tree ? state.selectFamilyTree.tree.id : -1
+    }; 
 }
 
 export default connect(mapStateToProps, { getFamilyMembers, deleteFamilyTree, selectFamilyTree })(SelectedFamilyTree);
