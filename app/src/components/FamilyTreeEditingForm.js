@@ -5,6 +5,8 @@ import { Card, CardBody, CardHeader, Form, FormGroup, Input, Label } from 'react
 
 import { validateToken, getFamilyTrees, selectFamilyTree } from '../actions';
 
+import FamilyMemberList from '../components/FamilyMemberList';
+
 function FamilyTreeEditingForm(props) {
     let { id } = useParams();
     id = parseInt(id);
@@ -36,6 +38,7 @@ function FamilyTreeEditingForm(props) {
                         <Input type="text" name="name" id="ftef-name" defaultValue={props.selectedTree ? props.selectedTree.name : ''}/>
                     </FormGroup>
                 </Form>
+                {props.selectedTree ? <FamilyMemberList editing familyTreeID={props.selectedTree.id}/> : null}
             </CardBody>
         </Card>
     );
