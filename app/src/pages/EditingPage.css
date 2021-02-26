@@ -6,3 +6,17 @@
     width: 75%;
     margin: 0 auto;
 }
+
+#family-member-creation-form {
+    margin: 10px;
+}
+
+#fmcf-card .card-header {
+    position: relative;
+}
+
+#fmcf-close-button {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+}
